@@ -14,6 +14,10 @@ module SystemCache
       @redis.set(key, value)
     end
 
+    def delete(key)
+      @redis.del(key)
+    end
+
     def all_keys
       @redis.keys('*')
     end

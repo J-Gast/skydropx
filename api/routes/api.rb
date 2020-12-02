@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require './api/tasks/updater'
 require './api/utils/jsend'
+require './updater/updater'
 require 'grape'
 require_relative 'v1/routes'
 
@@ -16,7 +16,7 @@ module TrackingsService
       header['Access-Control-Request-Method'] = 'POST'
     end
 
-    Tasks::Updater.look_for_updates
+    Updater::Updater.new.look_for_updates
     # V1
     mount Routes::V1::API
   end

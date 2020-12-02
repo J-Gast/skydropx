@@ -5,7 +5,6 @@ require './api/business/trackings'
 module Routes
   module V1
     class Tracking < Grape::API
-      include Utils
       version 'v1'
 
       desc 'Resource to handle tracking numbers'
@@ -22,8 +21,7 @@ module Routes
                    desc: 'Parcel Servicess'
         end
         post do
-          JSend.success(tracking_number: Business::Tracking.new.create(params[:tracking_number],
-                                                                       params[:carrier]))
+          Business::Tracking.new.create(params[:tracking_number], params[:carrier])
         end
       end
     end
