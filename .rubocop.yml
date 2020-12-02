@@ -1,0 +1,11 @@
+# This is the configuration used to check the rubocop source code.
+AllCops:
+  TargetRubyVersion: 2.5
+Documentation:
+  Enabled: false
+Metrics/LineLength:
+  Max: 110
+Metrics/MethodLength:
+  Max: 25
+Metrics/AbcSize:
+  Max: 30
