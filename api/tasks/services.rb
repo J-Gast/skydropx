@@ -4,6 +4,8 @@ require 'dry-container'
 require 'dry-auto_inject'
 require 'fedex'
 require 'redis'
+require 'yaml'
+require './api/tasks/service_config'
 
 # Maintains the services in memory or creates them accordingly
 class Services
@@ -14,12 +16,7 @@ class Services
   end
 
   register :fedex, memoize: true do
-    fedex = Fedex::Shipment.new(key: 'O21wEWKhdDn2SYyb',
-                                password: 'db0SYxXWWh0bgRSN7Ikg9Vunz',
-                                account_number: '510087780',
-                                meter: '119009727',
-                                mode: 'test')
-    fedex
+    Fedex::Shipment.new(ServiceConfig[:configuration]['fedex'].symbolize_keys)
   end
 end
 

@@ -11,8 +11,8 @@ require 'logger'
 module Updater
   class Updater
     LOGGER = Logger.new('logfile.log')
-    WAIT_TIME = 5
-    WAIT_TIME_ERROR = 10
+    WAIT_TIME = ServiceConfig[:configuration]['wait_time']['normal']
+    WAIT_TIME_ERROR = ServiceConfig[:configuration]['wait_time']['error']
     CARRIER_ERRORS = {
       number_not_exists: ['Invalid tracking numbers. Please check the following numbers and resubmit.']
     }.freeze
