@@ -11,6 +11,9 @@ require 'logger'
 module Updater
   class Updater
     LOGGER = Logger.new('logfile.log')
+    WAIT_TIME = 5
+    WAIT_TIME_ERROR = 10
+    NUMBER_NOT_EXISTS = 'Invalid tracking numbers. Please check the following numbers and resubmit.'
     def initialize
       @cache = SystemCache::CacheFactory.instance.for(:redis)
       @notifier = Notifier::Notifier.new
@@ -20,11 +23,17 @@ module Updater
       Thread.new do
         loop do
           keys = @cache.all_keys
-          keys.each { |tracking_number| update_tracking_information(tracking_number) }
-          sleep 5
+          keys.each do |tracking_number|
+            update_tracking_information(tracking_number)
+          rescue Fedex::RateError => e
+            LOGGER.error("Information of tracking number #{tracking_number} will be deleted " \
+                  'because does not exist')
+            @cache.delete(tracking_number) if e.message == NUMBER_NOT_EXISTS
+          end
+          sleep WAIT_TIME
         rescue StandardError => e
           LOGGER.error(e)
-          sleep 10
+          sleep WAIT_TIME_ERROR
         end
       end
     end

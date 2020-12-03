@@ -4,7 +4,7 @@ require './test/test_helper'
 require './test/utils/class_factory'
 require './updater/updater'
 
-class TestUpdater < Minitest::Test
+class TestUpdater < Minitest::Test # rubocop:disable Metrics/ClassLength
   def setup
     @updater = Updater::Updater.new
     Utils::ClassFactory.create_class('Event', 'event_type', 'event_description', 'arrival_location')
@@ -105,6 +105,7 @@ class TestUpdater < Minitest::Test
   end
 
   def stub_redis2(tracking_number)
+    stub_redis_set
     SystemCache::RedisCache
       .any_instance
       .expects(:get)
@@ -112,6 +113,14 @@ class TestUpdater < Minitest::Test
       .returns('{"tracking_number":"020207021381215","carrier":"fedex","tracking_status":"CREATED",' \
                '"event_list":[{"event_type":"PU","event_description":"Picked up",' \
                '"arrival_location":"PICKUP_LOCATION"}]}')
+      .once
+  end
+
+  def stub_redis_set
+    SystemCache::RedisCache
+      .any_instance
+      .expects(:set)
+      .returns('OK')
       .once
   end
 end

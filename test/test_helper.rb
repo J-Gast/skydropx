@@ -3,7 +3,7 @@
 require 'simplecov'
 
 SimpleCov.start { add_filter('/test/') }
-SimpleCov.minimum_coverage(90)
+SimpleCov.minimum_coverage(85)
 
 require 'minitest/autorun'
 require 'mocha/minitest'
