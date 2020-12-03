@@ -18,9 +18,13 @@ module Business
       data = { tracking_number: tracking_number, carrier: carrier.downcase }
       data[:tracking_status] = parcel_service.tracking_status(tracking_info.details[:status_code])
       data[:event_list] = tracking_info.events.map { |event| Utils.event_to_hash(event) }
-      data[:event_list].pop
+      # data[:event_list].pop
       @cache.set(tracking_number, data.to_json)
       JSend.success(tracking_information: data)
+    rescue Fedex::RateError => e
+      JSend.fail(e)
+    rescue Redis::CannotConnectError => e
+      JSend.error('Cannot connect to Redis')
     rescue StandardError => e
       JSend.error(e)
     end
