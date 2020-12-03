@@ -3,7 +3,6 @@
 require './api/message_service/publisher/redis'
 require 'singleton'
 
-
 module MessageService
   class MessageServiceFactory
     include Singleton

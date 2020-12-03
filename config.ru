@@ -5,4 +5,3 @@ require './updater/updater'
 
 Updater::Updater.new.look_for_updates
 run TrackingsService::API
-

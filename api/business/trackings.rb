@@ -23,7 +23,7 @@ module Business
       JSend.success(tracking_information: data)
     rescue Fedex::RateError => e
       JSend.fail(e)
-    rescue Redis::CannotConnectError => e
+    rescue Redis::CannotConnectError
       JSend.error('Cannot connect to Redis')
     rescue StandardError => e
       JSend.error(e)

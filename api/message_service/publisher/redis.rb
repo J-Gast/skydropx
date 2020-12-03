@@ -13,4 +13,3 @@ module MessageService
     end
   end
 end
-

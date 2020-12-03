@@ -26,12 +26,7 @@ end
 class TestRoute < Test
   include Rack::Test::Methods
 
-  def before_setup
-    super
-  end
-
   def app
     TrackingsService::API
   end
 end
-

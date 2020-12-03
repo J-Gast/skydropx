@@ -3,7 +3,6 @@
 require './api/system_cache/redis_cache'
 require 'singleton'
 
-
 module SystemCache
   class CacheFactory
     include Singleton

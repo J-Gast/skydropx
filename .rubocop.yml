@@ -1,6 +1,8 @@
 # This is the configuration used to check the rubocop source code.
 AllCops:
   TargetRubyVersion: 2.5
+  Exclude:
+    - Gemfile
 Documentation:
   Enabled: false
 Metrics/LineLength:

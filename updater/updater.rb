@@ -19,14 +19,12 @@ module Updater
     def look_for_updates
       Thread.new do
         loop do
-          begin
           keys = @cache.all_keys
           keys.each { |tracking_number| update_tracking_information(tracking_number) }
           sleep 5
-          rescue StandardError => e
-            LOGGER.error(e)
-            sleep 10
-          end
+        rescue StandardError => e
+          LOGGER.error(e)
+          sleep 10
         end
       end
     end

@@ -97,16 +97,21 @@ class TestUpdater < Minitest::Test
       .any_instance
       .expects(:get)
       .with(tracking_number)
-      .returns('{"tracking_number":"020207021381215","carrier":"fedex","tracking_status":"CREATED","event_list":[{"event_type":"PU","event_description":"Picked up","arrival_location":"PICKUP_LOCATION"},{"event_type":"OC","event_description":"Shipment information sent to FedEx","arrival_location":"CUSTOMER"}]}')
+      .returns('{"tracking_number":"020207021381215","carrier":"fedex","tracking_status":"CREATED",' \
+               '"event_list":[{"event_type":"PU","event_description":"Picked up",' \
+               '"arrival_location":"PICKUP_LOCATION"},{"event_type":"OC",' \
+               '"event_description":"Shipment information sent to FedEx","arrival_location":"CUSTOMER"}]}')
       .once
   end
 
   def stub_redis2(tracking_number)
     SystemCache::RedisCache
-        .any_instance
-        .expects(:get)
-        .with(tracking_number)
-        .returns('{"tracking_number":"020207021381215","carrier":"fedex","tracking_status":"CREATED","event_list":[{"event_type":"PU","event_description":"Picked up","arrival_location":"PICKUP_LOCATION"}]}')
-        .once
+      .any_instance
+      .expects(:get)
+      .with(tracking_number)
+      .returns('{"tracking_number":"020207021381215","carrier":"fedex","tracking_status":"CREATED",' \
+               '"event_list":[{"event_type":"PU","event_description":"Picked up",' \
+               '"arrival_location":"PICKUP_LOCATION"}]}')
+      .once
   end
 end

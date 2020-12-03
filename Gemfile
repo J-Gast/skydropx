@@ -3,18 +3,17 @@
 source 'http://rubygems.org' do
   gem 'dry-auto_inject',        '~> 0.4'
   gem 'dry-container',          '~> 0.6'
+  gem 'fedex'
   gem 'grape',                  '~> 1.2'
   gem 'grape-entity'
   gem 'json',                   '~> 2.2'
   gem 'puma',                   '~> 4.0'
   gem 'rake',                   '~> 12.3'
   gem 'redis'
-  gem 'fedex'
 
   group :development, :test do
     gem 'byebug'
     gem 'pry'
-    gem 'rb-readline'
   end
 
   group :development do
