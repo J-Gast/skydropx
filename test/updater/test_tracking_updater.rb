@@ -57,6 +57,10 @@ class TestUpdater < Minitest::Test # rubocop:disable Metrics/ClassLength
       .any_instance
       .expects(:delete_tracking_information)
       .once
+    Notifier::Notifier
+      .any_instance
+      .expects(:notify)
+      .once
     @updater.update_tracking_information(tracking_number)
   end
 
